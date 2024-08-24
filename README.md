@@ -1,4 +1,6 @@
-# BrutalistPaletteWidget
+# Brutalist Palette Widget
+
+![Screenshot](screenshot.png)
 
 A minimalist, brutalist-inspired color palette widget that displays colors and allows users to copy their hex values with a single click. The widget is designed to be easy to integrate and customize.
 Features
@@ -15,12 +17,12 @@ Features
 
 ## Usage Example
 
-Include the following code in your HTML to use the BrutalistPaletteWidget:
+Include the following code in your HTML to use the palette widget:
 
 ```html
 <script src="palette.js"></script>
 <script>
-    new BrutalistPaletteWidget(["acbad5", "2a353b", "506753", "c4d387", "dae8d9", "fdfae9", "e8b6bc"], "Palette Name");
+    new BrutalistPaletteWidget(["acbad5", "c4d387", "dae8d9", "e8b6bc"], "Palette Name");
 </script>
 ```
 
@@ -32,6 +34,7 @@ You can easily customize the widget’s appearance by modifying the CSS variable
 :root {
     --bpw-background-color: #ffffff;
     --bpw-border-color: #000000;
+    --bpw-font-family: sans-serif;
     --bpw-font-size: 14px;
     --bpw-font-color: #000000;
     --bpw-height: 150px;

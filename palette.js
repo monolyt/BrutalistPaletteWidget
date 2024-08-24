@@ -73,6 +73,7 @@ BrutalistPaletteWidget.prototype = {
                 :root {
                     --bpw-background-color: #ffffff;
                     --bpw-border-color: #000000;
+                    --bpw-font-family: sans-serif;
                     --bpw-font-size: 14px;
                     --bpw-font-color: #000000;
                     --bpw-height: 150px;
@@ -89,6 +90,7 @@ BrutalistPaletteWidget.prototype = {
                     all: unset;
                     background: var(--bpw-background-color);
                     border: 1px solid var(--bpw-border-color);
+                    font-family: var(--bpw-font-family);
                     display: block;
                     overflow: hidden;
                     height: var(--bpw-height);
