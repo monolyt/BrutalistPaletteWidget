@@ -22,7 +22,7 @@ Include the following code in your HTML to use the palette widget:
 ```html
 <script src="palette.js"></script>
 <script>
-    new BrutalistPaletteWidget(["acbad5", "c4d387", "dae8d9", "e8b6bc"], "Palette Name");
+    new BrutalistPaletteWidget(["acbad5", "c4d387", "dae8d9", "e8b6bc"], "Palette Name", "This is an optional description of the palette");
 </script>
 ```
 

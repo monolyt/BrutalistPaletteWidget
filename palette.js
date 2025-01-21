@@ -1,60 +1,44 @@
 "use strict";
-
-// Constructor function for BrutalistPaletteWidget
-var BrutalistPaletteWidget = function (colors, name) {
-    this.colors = colors; // Array of color hex values
-    this.name = name; // Name of the palette
-    this.initElements(); // Initialize the widget elements
+var BrutalistPaletteWidget = function (colors, name, description) {
+    this.colors = colors;
+    this.name = name;
+    this.description = description;
+    this.initElements();
 };
 
 BrutalistPaletteWidget.prototype = {
-    // Initialize the widget elements
     initElements: function () {
         var d = this,
             v = document.currentScript; // Get the current script element
 
-        // Create a container for the widget
         var f = document.createElement("div");
         f.classList.add("brutalist-palette-widget");
-        v.parentNode.insertBefore(f, v.nextSibling); // Insert the widget after the current script
+        v.parentNode.insertBefore(f, v.nextSibling);
 
-        // Create a container for the colors
         var P = document.createElement("div");
         P.classList.add("brutalist-palette-widget_colors");
-
-        // Create a div for each color in the palette
         this.colors.forEach(function (color) {
             var v = document.createElement("div");
-            v.style.background = "#" + color; // Set the background color
-            d.isLight(color) && v.classList.add("is-light"); // Add 'is-light' class if color is light
-
-            // Create a span to display the color code
+            v.style.background = "#" + color;
+            d.isLight(color) && v.classList.add("is-light");
             var e = document.createElement("span");
-            e.innerHTML = color.toUpperCase();
-
-            // Add click event to copy the color code
+            e.innerHTML = "#" + color.toUpperCase();
             v.onclick = function () {
                 e.innerHTML = "Copied!";
-                d.copyText(color);
+                d.copyText("#" + color);
             };
-
-            // Revert text after mouse leaves
             v.onmouseleave = function () {
                 setTimeout(function () {
-                    e.innerHTML = color.toUpperCase();
+                    e.innerHTML = "#" + color.toUpperCase();
                 }, 200);
             };
-
-            // Append the span to the color div and the color div to the container
             v.appendChild(e);
             P.appendChild(v);
         });
 
-        // Create a container for the palette name
         var e = document.createElement("div");
         e.classList.add("brutalist-palette-widget_info");
 
-        // Create and append the palette name
         var q = document.createElement("div");
         q.classList.add("brutalist-palette-widget_info_name");
         if (this.name) q.innerHTML = this.name;
@@ -63,53 +47,41 @@ BrutalistPaletteWidget.prototype = {
         f.appendChild(P);
         f.appendChild(e);
 
-        // Inject the CSS if it hasn't been added already
+        if (this.description) {
+            var dBox = document.createElement("div");
+            dBox.classList.add("brutalist-palette-widget_description");
+            dBox.innerHTML = this.description;
+            f.appendChild(dBox);
+        }
+
         if (document.getElementsByClassName("brutalist-palette-widget-css").length === 0) {
             var u = document.createElement("style");
             u.classList.add("brutalist-palette-widget-css");
-
-            // Using CSS variables to allow easy customization
             u.innerHTML = `
-                :root {
-                    --bpw-background-color: #ffffff;
-                    --bpw-border-color: #000000;
-                    --bpw-font-family: sans-serif;
-                    --bpw-font-size: 14px;
-                    --bpw-font-color: #000000;
-                    --bpw-height: 150px;
-                    --bpw-margin: 2rem auto;
-                    --bpw-info-padding: 0 15px;
-                    --bpw-info-height: 36px;
-                    --bpw-hover-width: 80px;
-                    --bpw-transition-duration: 0.1s;
-                    --bpw-font-weight: bold;
-                    --bpw-light-color: #000000;
-                    --bpw-dark-color: #ffffff;
-                }
                 .brutalist-palette-widget {
                     all: unset;
-                    background: var(--bpw-background-color);
-                    border: 1px solid var(--bpw-border-color);
-                    font-family: var(--bpw-font-family);
+                    background: var(--color-background);
+                    border: 1px solid var(--color-border);
                     display: block;
                     overflow: hidden;
-                    height: var(--bpw-height);
-                    margin: var(--bpw-margin);
-                    font-size: var(--bpw-font-size);
-                    color: var(--bpw-font-color);
+                    height: auto;
+                    margin: 2rem auto;
+                    font-size: 14px;
+                    color: var(--color-text);
+                    transition: background var(--transition-time) ease;
                 }
                 .brutalist-palette-widget_colors {
                     display: flex;
                     width: 100%;
-                    height: calc(var(--bpw-height) - var(--bpw-info-height));
+                    height: 114px;
                 }
                 .brutalist-palette-widget_colors div {
                     flex-grow: 1;
-                    transition: all var(--bpw-transition-duration) ease-in-out;
+                    transition: all 0.1s ease-in-out;
                     cursor: pointer;
                     position: relative;
                     overflow: hidden;
-                    border-right: 1px solid var(--bpw-border-color);
+                    border-right: 1px solid var(--color-border);
                 }
                 .brutalist-palette-widget_colors div:last-child {
                     border-right: 0;
@@ -121,42 +93,46 @@ BrutalistPaletteWidget.prototype = {
                     position: absolute;
                     top: 50%;
                     transform: translateY(-50%);
-                    color: var(--bpw-dark-color);
+                    color: #fff;
                     opacity: 0;
-                    transition: all var(--bpw-transition-duration) ease-in-out;
+                    transition: all 0.1s ease-in-out;
                     cursor: pointer;
                     font-size: 15px;
-                    font-weight: var(--bpw-font-weight);
+                    font-weight: bold;
                 }
                 .brutalist-palette-widget_colors div.is-light span {
-                    color: var(--bpw-light-color);
+                    color: #000;
                 }
                 .brutalist-palette-widget_colors div:hover {
-                    flex-basis: var(--bpw-hover-width);
+                    flex-basis: 80px;
                 }
                 .brutalist-palette-widget_colors div:hover span {
                     opacity: 1;
                 }
                 .brutalist-palette-widget_info {
                     position: relative;
-                    padding: var(--bpw-info-padding);
-                    height: var(--bpw-info-height);
+                    padding: 0 15px;
+                    height: 36px;
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    border-top: 1px solid var(--bpw-border-color);
+                    border-top: 1px solid var(--color-border);
                 }
                 .brutalist-palette-widget_info_name {
-                    font-weight: var(--bpw-font-weight);
+                    font-weight: bold;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                }
+                .brutalist-palette-widget_description {
+                    font-size: 12px;
+                    padding: 10px 15px;
+                    color: var(--color-text-secondary);
+                    border-top: 1px solid var(--color-border);
                 }
             `;
             document.head.appendChild(u);
         }
     },
-
-    // Copy color code to clipboard
     copyText: function (color) {
         var v = document.createElement("textarea");
         v.style.cssText = "position:absolute;left:-9999px";
@@ -164,22 +140,18 @@ BrutalistPaletteWidget.prototype = {
         document.body.appendChild(v);
         v.select();
         try {
-            document.execCommand("copy"); // Copy the color code
+            document.execCommand("copy");
         } catch (e) {
             console.error("Failed to copy text", e);
         }
         window.getSelection().removeAllRanges();
         v.remove();
     },
-
-    // Check if the color is light (to adjust text color accordingly)
     isLight: function (color) {
         var v = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color),
-            e = parseInt(v[1], 16), // Red component
-            d = parseInt(v[2], 16), // Green component
-            P = parseInt(v[3], 16); // Blue component
-
-        // Calculate brightness using the luminance formula
-        return 160 <= Math.round((299 * e + 587 * d + 114 * P) / 1000);
+            e = parseInt(v[1], 16),
+            d = parseInt(v[2], 16),
+            P = parseInt(v[3], 16);
+        return 160 <= Math.round((299 * e + 587 * d + 114 * P) / 1e3);
     }
 };
