@@ -1,4 +1,4 @@
-# Hue Grid Color Palette Widget
+# Hue Grid Color Widget
 
 **HueGrid** is a minimalist, brutalist-inspired color palette widget that displays colors and allows users to copy their hex values with a single click. The widget is designed to be easy to integrate and customize.
 
@@ -21,13 +21,13 @@
 2. Create a new `HueGrid` instance with your desired colors, palette name, and optional description:
     ```html
     <script>
-        new HueGrid(["#hexvalue1", "#hexvalue2"], "Title", "Description");
+        new HueGrid(["hexvalue1", "hexvalue2"], "Title", "Description");
     </script>
     ```
 
 ### Examples
 
-Have a look on the preview page to see some examples of usage.
+Have a look on the [preview page](https://monolyt.github.io/HueGrid/) to see some examples of usage and see some functional widgets.
 
 ## Customization
 You can easily customize the widget’s appearance by modifying the CSS variables in the script:
@@ -49,7 +49,7 @@ You can easily customize the widget’s appearance by modifying the CSS variable
     --hg-dark-color: #ffffff;
 }
 ```
-Adjust these variables to match your design needs.
+Adjust these variables to match your needs.
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
