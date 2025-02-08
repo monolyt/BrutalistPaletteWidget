@@ -1,56 +1,55 @@
-# Brutalist Palette Widget
+# Hue Grid Color Palette Widget
+
+**HueGrid** is a minimalist, brutalist-inspired color palette widget that displays colors and allows users to copy their hex values with a single click. The widget is designed to be easy to integrate and customize.
 
 ![Screenshot](screenshot.png)
 
-A minimalist, brutalist-inspired color palette widget that displays colors and allows users to copy their hex values with a single click. The widget is designed to be easy to integrate and customize.
-Features
-
+## Features
 - Displays a color palette with the provided hex values.
 - Copies the hex value of a color to the clipboard when clicked.
-- Automatically adjusts the text color for light backgrounds.
-- Simple and clean design with easy customization using CSS variables.
+- Automatically adjusts text color for light backgrounds.
+- Simple and clean design with CSS customization.
+- Optional description for your palette.
+- Shareable link to your palette.
 
-## Installation
+## Usage
 
-1. Download the palette.js file and include it in your project.
-2. Add the widget to your HTML by creating a new BrutalistPaletteWidget instance with your desired colors and palette name.
+1. Download the `hgwidget.js` file and include it in your project:
+    ```html
+    <script src="hgwidget.js"></script>
+    ```
+2. Create a new `HueGrid` instance with your desired colors, palette name, and optional description:
+    ```html
+    <script>
+        new HueGrid(["#hexvalue1", "#hexvalue2"], "Title", "Description");
+    </script>
+    ```
 
-## Usage Example
+### Examples
 
-Include the following code in your HTML to use the palette widget:
-
-```html
-<script src="palette.js"></script>
-<script>
-    new BrutalistPaletteWidget(["acbad5", "c4d387", "dae8d9", "e8b6bc"], "Palette Name", "This is an optional description of the palette");
-</script>
-```
+Have a look on the preview page to see some examples of usage.
 
 ## Customization
-
-You can easily customize the widget’s appearance by modifying the CSS variables defined in the script:
-
+You can easily customize the widget’s appearance by modifying the CSS variables in the script:
 ```css
 :root {
-    --bpw-background-color: #ffffff;
-    --bpw-border-color: #000000;
-    --bpw-font-family: sans-serif;
-    --bpw-font-size: 14px;
-    --bpw-font-color: #000000;
-    --bpw-height: 150px;
-    --bpw-margin: 2rem auto;
-    --bpw-info-padding: 0 15px;
-    --bpw-info-height: 36px;
-    --bpw-hover-width: 80px;
-    --bpw-transition-duration: 0.1s;
-    --bpw-font-weight: bold;
-    --bpw-light-color: #000000;
-    --bpw-dark-color: #ffffff;
+    --hg-background-color: #ffffff;
+    --hg-border-color: #000000;
+    --hg-font-size: 16px;
+    --hg-font-size-description: 14px;
+    --hg-font-color: #000000;
+    --hg-height: 150px;
+    --hg-margin: 2rem auto;
+    --hg-info-padding: 0 15px;
+    --hg-info-height: 36px;
+    --hg-hover-width: 80px;
+    --hg-transition-duration: 0.1s;
+    --hg-font-weight: bold;
+    --hg-light-color: #000000;
+    --hg-dark-color: #ffffff;
 }
 ```
-
 Adjust these variables to match your design needs.
 
 ## License
-
-This project is open-source and available under the MIT License.
+This project is open-source and available under the [MIT License](LICENSE).
