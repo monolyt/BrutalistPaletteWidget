@@ -2,7 +2,7 @@
 
 **HueGrid** is a minimalist, brutalist-inspired color palette widget that displays colors and allows users to copy their hex values with a single click. The widget is designed to be easy to integrate and customize.
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.gif)
 
 ## Features
 - Displays a color palette with the provided hex values.
